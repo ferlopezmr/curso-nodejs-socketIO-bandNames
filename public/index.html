@@ -9,20 +9,24 @@
     <h1>Acceso denegado</h1>
     <script src="/socket.io/socket.io.js"></script> 
     <script>
-        let socket = io();
-        socket.on("connect", function(){
-            console.log("Conectado al servidor");
-        });
-        socket.on("disconnect", function(){
-            console.log("Perdimos conección con el servidor");
-        });
+        document.addEventListener("DOMContentLoaded", function() { 
+            
+            let socket = io(); 
 
-        //emit message
-        socket.emit("mensaje", {nombre: "fer"});
-        //listen menssage
-        socket.on("mensaje", function(payload){
-            console.log("Mensaje desde el servidor", payload);
-        })
+            socket.on("connect", function(){
+                console.log("Conectado al servidor");
+            });
+
+            socket.on("bands", function(payload){ 
+                console.log("Event received");
+                console.table(payload);
+            });
+ 
+            socket.on("disconnect", function(){
+                console.log("Perdimos conexión con el servidor");
+            });
+ 
+        });
 
     </script>
 </body>
